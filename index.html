@@ -1,0 +1,708 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Who Gets Space? — Ved Malandkar</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/bebas-neue/index.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/crimson-text/index.css">
+  <style>
+    :root {
+      --sb: #07070f;
+      --sd: #0d0d1a;
+      --sm: #13132b;
+      --sa: #c8a96e;
+      --st: #e8e6dc;
+      --su: #6a6858;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Crimson Text', Georgia, serif;
+      color: var(--st);
+      background: var(--sb);
+    }
+
+    /* ── Navigation ── */
+    nav {
+      position: sticky;
+      top: 0;
+      background: var(--sb);
+      border-bottom: 0.5px solid var(--sa);
+      padding: 0 2.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 56px;
+      z-index: 100;
+    }
+
+    .logo {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 20px;
+      letter-spacing: 0.12em;
+      color: var(--sa);
+      text-decoration: none;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--su);
+      text-decoration: none;
+      font-size: 13px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--sa); }
+
+    /* ── Hero ── */
+    #home {
+      background: var(--sb);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 4rem 2rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    #starfield {
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      pointer-events: none;
+    }
+
+    .eyebrow {
+      font-size: 11px;
+      letter-spacing: 0.35em;
+      color: var(--sa);
+      text-transform: uppercase;
+      margin-bottom: 1.75rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(72px, 14vw, 130px);
+      line-height: 0.88;
+      letter-spacing: 0.02em;
+      color: var(--st);
+      margin-bottom: 2rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-title span { color: var(--sa); }
+
+    .hero-sub {
+      font-size: 19px;
+      color: var(--su);
+      max-width: 500px;
+      line-height: 1.65;
+      position: relative;
+      z-index: 1;
+      margin-bottom: 3rem;
+    }
+
+    .cta {
+      display: inline-block;
+      padding: 11px 32px;
+      border: 0.5px solid var(--sa);
+      color: var(--sa);
+      font-family: 'Crimson Text', Georgia, serif;
+      letter-spacing: 0.12em;
+      font-size: 13px;
+      text-transform: uppercase;
+      cursor: pointer;
+      background: transparent;
+      text-decoration: none;
+      transition: all 0.2s;
+      position: relative;
+      z-index: 1;
+    }
+
+    .cta:hover { background: var(--sa); color: var(--sb); }
+
+    .scroll-hint {
+      position: absolute;
+      bottom: 2rem;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 11px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--su);
+      z-index: 1;
+      animation: bounce 2s infinite;
+    }
+
+    @keyframes bounce {
+      0%, 100% { transform: translateX(-50%) translateY(0); }
+      50% { transform: translateX(-50%) translateY(6px); }
+    }
+
+    /* ── Divider ── */
+    .divider {
+      width: 100%;
+      height: 0.5px;
+      background: linear-gradient(90deg, transparent, var(--sa), transparent);
+    }
+
+    /* ── Sections ── */
+    section {
+      padding: 6rem 0;
+    }
+
+    .section-alt { background: var(--sd); }
+
+    .section-inner {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 0 2.5rem;
+    }
+
+    .section-label {
+      font-size: 11px;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--sa);
+      margin-bottom: 1rem;
+    }
+
+    .section-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 56px;
+      letter-spacing: 0.04em;
+      color: var(--st);
+      margin-bottom: 0.5rem;
+    }
+
+    .section-rule {
+      width: 48px;
+      height: 1px;
+      background: var(--sa);
+      margin-bottom: 2.5rem;
+    }
+
+    .section-body {
+      font-size: 18px;
+      color: var(--su);
+      line-height: 1.7;
+      max-width: 680px;
+      margin-bottom: 3rem;
+    }
+
+    /* ── Research Cards ── */
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1px;
+      border: 0.5px solid #1e1e30;
+      background: #1e1e30;
+    }
+
+    .card {
+      padding: 1.75rem;
+      background: #080812;
+      transition: background 0.2s;
+    }
+
+    .card:hover { background: #0c0c1a; }
+
+    .card-label {
+      font-size: 10px;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--sa);
+      margin-bottom: 0.75rem;
+    }
+
+    .card-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 22px;
+      color: var(--st);
+      margin-bottom: 0.75rem;
+    }
+
+    .card-body {
+      font-size: 14px;
+      color: var(--su);
+      line-height: 1.65;
+    }
+
+    .stat-row {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 1.5rem;
+      margin-top: 3rem;
+    }
+
+    .stat {
+      border-left: 1.5px solid var(--sa);
+      padding-left: 1.25rem;
+    }
+
+    .stat-num {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 44px;
+      color: var(--sa);
+      line-height: 1;
+      margin-bottom: 4px;
+    }
+
+    .stat-label {
+      font-size: 13px;
+      color: var(--su);
+      line-height: 1.5;
+    }
+
+    /* ── Interview Cards ── */
+    .interview-list {
+      display: flex;
+      flex-direction: column;
+      gap: 1px;
+      border: 0.5px solid #1e1e30;
+      background: #1e1e30;
+      margin-top: 0;
+    }
+
+    .icard {
+      background: #080812;
+      padding: 1.5rem;
+      display: flex;
+      gap: 1.25rem;
+      align-items: flex-start;
+      border-left: 2px solid var(--sa);
+      transition: background 0.2s;
+    }
+
+    .icard:hover { background: #0c0c1a; }
+
+    .avatar {
+      width: 46px;
+      height: 46px;
+      border-radius: 50%;
+      border: 0.5px solid var(--sa);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 17px;
+      color: var(--sa);
+      flex-shrink: 0;
+      background: var(--sm);
+    }
+
+    .icard-role {
+      font-size: 10px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--sa);
+      margin-bottom: 4px;
+    }
+
+    .icard-name {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 22px;
+      color: var(--st);
+      margin-bottom: 6px;
+    }
+
+    .icard-preview {
+      font-size: 15px;
+      color: var(--su);
+      font-style: italic;
+    }
+
+    .badge {
+      display: inline-block;
+      font-size: 9px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--su);
+      border: 0.5px solid #2a2a3a;
+      padding: 3px 8px;
+      margin-left: 8px;
+      vertical-align: middle;
+    }
+
+    /* ── Infographic Section ── */
+    .infographic-frame {
+      border: 0.5px solid #1e1e30;
+      padding: 6rem 2rem;
+      text-align: center;
+      margin-top: 2rem;
+      position: relative;
+    }
+
+    .infographic-frame::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 28px; height: 28px;
+      border-top: 1px solid var(--sa);
+      border-left: 1px solid var(--sa);
+    }
+
+    .infographic-frame::after {
+      content: '';
+      position: absolute;
+      bottom: 0; right: 0;
+      width: 28px; height: 28px;
+      border-bottom: 1px solid var(--sa);
+      border-right: 1px solid var(--sa);
+    }
+
+    .infographic-eyebrow {
+      font-size: 11px;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--su);
+      margin-bottom: 1rem;
+    }
+
+    .infographic-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 48px;
+      color: var(--st);
+      margin-bottom: 1rem;
+    }
+
+    .infographic-sub {
+      font-size: 15px;
+      color: var(--su);
+      max-width: 440px;
+      margin: 0 auto 2rem;
+      line-height: 1.65;
+    }
+
+    .coming-cta {
+      display: inline-block;
+      padding: 10px 28px;
+      border: 0.5px solid #2a2a3a;
+      color: var(--su);
+      font-size: 12px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    /* ── Policy Section ── */
+    .policy-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    .policy-item {
+      display: flex;
+      gap: 2rem;
+      align-items: flex-start;
+      padding: 2.5rem 0;
+      border-bottom: 0.5px solid #1a1a28;
+    }
+
+    .policy-item:last-child { border-bottom: none; }
+
+    .policy-num {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 48px;
+      color: var(--sa);
+      line-height: 1;
+      flex-shrink: 0;
+      width: 44px;
+      opacity: 0.6;
+    }
+
+    .policy-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 26px;
+      color: var(--st);
+      margin-bottom: 10px;
+      letter-spacing: 0.03em;
+    }
+
+    .policy-body {
+      font-size: 16px;
+      color: var(--su);
+      line-height: 1.7;
+      max-width: 640px;
+    }
+
+    .status-tag {
+      display: inline-block;
+      font-size: 10px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      padding: 4px 10px;
+      border: 0.5px solid #2a2a3a;
+      color: var(--su);
+      margin-top: 12px;
+    }
+
+    /* ── Footer ── */
+    footer {
+      background: var(--sb);
+      border-top: 0.5px solid #1e1e30;
+      padding: 2.5rem;
+      text-align: center;
+      font-size: 13px;
+      color: var(--su);
+      letter-spacing: 0.06em;
+    }
+
+    footer span { color: var(--sa); }
+
+    /* ── Responsive ── */
+    @media (max-width: 600px) {
+      .nav-links { display: none; }
+      .hero-title { font-size: 64px; }
+      .section-title { font-size: 40px; }
+      .card-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav>
+    <a class="logo" href="#home">Who Gets Space?</a>
+    <ul class="nav-links">
+      <li><a href="#home">Home</a></li>
+      <li><a href="#research">Research</a></li>
+      <li><a href="#interviews">Interviews</a></li>
+      <li><a href="#infographic">Infographic</a></li>
+      <li><a href="#policy">Policy</a></li>
+    </ul>
+  </nav>
+
+  <!-- Hero -->
+  <div id="home">
+    <canvas id="starfield"></canvas>
+    <div class="eyebrow">A Senior Capstone Project &nbsp;·&nbsp; Olentangy Orange High School &nbsp;·&nbsp; 2026</div>
+    <div class="hero-title">Who Gets<br><span>Space?</span></div>
+    <div class="hero-sub">Space colonization is becoming reality. But the question of who gets access — and who gets left behind — remains unanswered.</div>
+    <a class="cta" href="#research">Explore the Research</a>
+    <div class="scroll-hint">↓ &nbsp; scroll to explore</div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- Research -->
+  <section id="research">
+    <div class="section-inner">
+      <div class="section-label">01 — Research</div>
+      <div class="section-title">The Problem</div>
+      <div class="section-rule"></div>
+      <div class="section-body">Space colonization is technologically feasible. But economically, politically, and ethically — it is being built on the same systems of inequality that define life on Earth. This project investigates why, and proposes a path forward.</div>
+      <div class="card-grid">
+        <div class="card">
+          <div class="card-label">Technology</div>
+          <div class="card-title">The Gap Is Closable</div>
+          <div class="card-body">Current technology supports temporary bases. Permanent habitats need AI-driven self-repair, 3D printing, and nuclear power — all within reach, but all expensive.</div>
+        </div>
+        <div class="card">
+          <div class="card-label">Economics</div>
+          <div class="card-title">20 Years to Returns</div>
+          <div class="card-body">Sandler & Schulze's model shows space colonies only become profitable after 20 years. Only sustained capital investment — accessible to very few — survives that timeline.</div>
+        </div>
+        <div class="card">
+          <div class="card-label">Politics</div>
+          <div class="card-title">Geopolitics Drives Access</div>
+          <div class="card-body">The Artemis Accords exclude India, China, and Russia. Space is being governed before it is colonized — and not everyone has a seat at the table.</div>
+        </div>
+        <div class="card">
+          <div class="card-label">Ethics</div>
+          <div class="card-title">Who Gets a Seat?</div>
+          <div class="card-body">Only a small portion of humanity can realistically migrate to space. Under current systems, that means the wealthy and the powerful go first.</div>
+        </div>
+      </div>
+      <div class="stat-row">
+        <div class="stat">
+          <div class="stat-num">0.1%</div>
+          <div class="stat-label">NASA's current share of US GDP — down from 4.4% at Apollo's peak</div>
+        </div>
+        <div class="stat">
+          <div class="stat-num">20yr</div>
+          <div class="stat-label">Threshold before space colonies produce returns exceeding investment</div>
+        </div>
+        <div class="stat">
+          <div class="stat-num">10x</div>
+          <div class="stat-label">GDP spending multiplier from a space sector shock, per Corrado et al.</div>
+        </div>
+        <div class="stat">
+          <div class="stat-num">$89K</div>
+          <div class="stat-label">SpaceX's per-kg delivery cost vs. NASA's previous $272K — a 3x efficiency gain</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- Interviews -->
+  <section id="interviews" class="section-alt">
+    <div class="section-inner">
+      <div class="section-label">02 — Interviews</div>
+      <div class="section-title">Voices</div>
+      <div class="section-rule"></div>
+      <div class="section-body">To understand the human dimension of space equity, this project spoke with politicians, economists, and researchers who sit at the intersection of policy and the future of space.</div>
+      <div class="interview-list">
+        <div class="icard">
+          <div class="avatar">JJ</div>
+          <div>
+            <div class="icard-role">Federal · US House of Representatives, District 4</div>
+            <div class="icard-name">Jim Jordan <span class="badge">Coming Soon</span></div>
+            <div class="icard-preview">"On the role of American government investment in determining who reaches space first."</div>
+          </div>
+        </div>
+        <div class="icard">
+          <div class="avatar">AB</div>
+          <div>
+            <div class="icard-role">State · Ohio Senate, District 19</div>
+            <div class="icard-name">Andrew Brenner <span class="badge">Coming Soon</span></div>
+            <div class="icard-preview">"On state-level political will and its connection to national space investment decisions."</div>
+          </div>
+        </div>
+        <div class="icard">
+          <div class="avatar">BL</div>
+          <div>
+            <div class="icard-role">State · Ohio House of Representatives, District 60</div>
+            <div class="icard-name">Brian Lorenz <span class="badge">Coming Soon</span></div>
+            <div class="icard-preview">"On how emerging technology policy is shaped at the local and state level."</div>
+          </div>
+        </div>
+        <div class="icard">
+          <div class="avatar">VR</div>
+          <div>
+            <div class="icard-role">Policy · Former DOGE Director, Ohio Governor Candidate</div>
+            <div class="icard-name">Vivek Ramaswamy <span class="badge">Coming Soon</span></div>
+            <div class="icard-preview">"On government efficiency, private sector competition, and American space leadership."</div>
+          </div>
+        </div>
+        <div class="icard">
+          <div class="avatar">AP</div>
+          <div>
+            <div class="icard-role">Economics · AP Economics, Olentangy Orange High School</div>
+            <div class="icard-name">AP Economics Teacher <span class="badge">Coming Soon</span></div>
+            <div class="icard-preview">"On why developing nations structurally struggle to compete in industries requiring 20+ year return timelines."</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- Infographic -->
+  <section id="infographic">
+    <div class="section-inner">
+      <div class="section-label">03 — Infographic</div>
+      <div class="section-title">The Data</div>
+      <div class="section-rule"></div>
+      <div class="section-body">An interactive visualization mapping the global inequality of space access — who is investing, who is excluded, and what the governance gap looks like in real numbers.</div>
+      <div class="infographic-frame">
+        <div class="infographic-eyebrow">Interactive Visualization — In Development</div>
+        <div class="infographic-title">Space Equity Index</div>
+        <div class="infographic-sub">A country-by-country breakdown of space access, Artemis Accords membership, national space budgets as % of GDP, and representation in space governance bodies. Coming soon.</div>
+        <div class="coming-cta">Check Back Soon</div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- Policy -->
+  <section id="policy" class="section-alt">
+    <div class="section-inner">
+      <div class="section-label">04 — Policy</div>
+      <div class="section-title">The Proposal</div>
+      <div class="section-rule"></div>
+      <div class="section-body">Based on original research and firsthand interviews, this project proposes three concrete policy changes to make space colonization equitable for all of humanity — not just the powerful few.</div>
+      <div class="policy-list">
+        <div class="policy-item">
+          <div class="policy-num">01</div>
+          <div>
+            <div class="policy-title">Mandatory Representation in Space Governance</div>
+            <div class="policy-body">Reform the Artemis Accords framework to require inclusion of non-signatory nations — including India, Brazil, and African Union members — in all decisions regarding resource extraction, territorial claims, and colonization governance. Space cannot be governed exclusively by the nations that got there first.</div>
+            <div class="status-tag">In Development</div>
+          </div>
+        </div>
+        <div class="policy-item">
+          <div class="policy-num">02</div>
+          <div>
+            <div class="policy-title">A COTS Model for Developing Nations</div>
+            <div class="policy-body">Establish an international equivalent of NASA's Commercial Orbital Transportation Services program — a capital injection model that funds private space companies in developing nations to reduce the cost threshold of entry and stimulate indigenous space economies. If NASA tripled efficiency by outsourcing to SpaceX, the same logic applies globally.</div>
+            <div class="status-tag">In Development</div>
+          </div>
+        </div>
+        <div class="policy-item">
+          <div class="policy-num">03</div>
+          <div>
+            <div class="policy-title">A 20-Year Sustained Investment Compact</div>
+            <div class="policy-body">Based on Sandler & Schulze's economic modeling, meaningful returns from space colonization only emerge after 20 years. A binding international investment compact — modeled on climate agreements — would commit signatories to sustained funding beyond electoral cycles, preventing the political volatility that has historically collapsed space programs.</div>
+            <div class="status-tag">In Development</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <span>Who Gets Space?</span> &nbsp;·&nbsp; A Senior Capstone Project by Ved Malandkar &nbsp;·&nbsp; Olentangy Orange High School, Class of 2026
+  </footer>
+
+  <script>
+    // Starfield
+    const canvas = document.getElementById('starfield');
+    const ctx = canvas.getContext('2d');
+    const hero = document.getElementById('home');
+
+    function resizeCanvas() {
+      canvas.width = hero.offsetWidth;
+      canvas.height = hero.offsetHeight;
+      drawStars();
+    }
+
+    function drawStars() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      for (let i = 0; i < 250; i++) {
+        const x = Math.random() * canvas.width;
+        const y = Math.random() * canvas.height;
+        const r = Math.random() * 1.4;
+        const alpha = Math.random() * 0.7 + 0.2;
+        ctx.beginPath();
+        ctx.arc(x, y, r, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(255,255,255,${alpha})`;
+        ctx.fill();
+      }
+    }
+
+    resizeCanvas();
+    window.addEventListener('resize', resizeCanvas);
+
+    // Smooth scroll for nav links
+    document.querySelectorAll('a[href^="#"]').forEach(a => {
+      a.addEventListener('click', e => {
+        e.preventDefault();
+        const target = document.querySelector(a.getAttribute('href'));
+        if (target) target.scrollIntoView({ behavior: 'smooth' });
+      });
+    });
+  </script>
+</body>
+</html>
